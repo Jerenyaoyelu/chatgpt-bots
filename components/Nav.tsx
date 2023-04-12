@@ -1,4 +1,4 @@
-import logo from '../static/images/logo.png';
+import logo from '../static/images/logo.jpg';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 

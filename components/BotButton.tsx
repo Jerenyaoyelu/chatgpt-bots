@@ -1,14 +1,11 @@
+import { BotItem } from "@/routes/constant";
 import Image from "next/image";
 
 interface BtnProp {
-  icon: string;
-  id: string;
   onClick?: (id: string) => void;
-  text: string;
-  desc: string;
 }
 
-export const BotButton: React.FC<BtnProp> = ({ icon, id, onClick, text, desc }) => {
+export const BotButton: React.FC<BtnProp & BotItem> = ({ icon, id, onClick, text, desc }) => {
   return (
     <div
       className="cursor-pointer p-6 flex items-center justify-center rounded-lg border-2 transition-shadow duration-200 hover:shadow-lg border-gray-400 hover:border-blue-600"

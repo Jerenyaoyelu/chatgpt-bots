@@ -1,22 +1,14 @@
 import { BotButton } from "@/components/BotButton";
 import { useState } from "react";
-import ieltsEgb from '@/static/svg/ielts-egb.svg';
-interface ListItem {
-  id: string;
-  text: string;
-  icon: string;
-  desc: string;
-}
+import { useRouter } from "next/router";
+import { BotItem, bots } from "../constant";
+
+
 
 const Home: React.FC = () => {
-  const [list, setList] = useState<ListItem[]>([
-    {
-      id: 'ielts-egb',
-      text: 'IELTS-egb',
-      icon: ieltsEgb,
-      desc: '你的雅思作文打分器，又快又准'
-    }
-  ])
+  const router = useRouter();
+
+  const [list, setList] = useState<BotItem[]>(bots)
 
   const handleTry = () => {
     const el = document.getElementById('what-we-have');
@@ -25,6 +17,10 @@ const Home: React.FC = () => {
       block: 'start',
       inline: 'start'
     })
+  }
+
+  const goToBot = (id: string) => {
+    router.push(`/bots/${id}`)
   }
 
   return (
@@ -40,7 +36,7 @@ const Home: React.FC = () => {
           <div onClick={handleTry} className="px-12 py-2 bg-blue-500 text-white rounded hover:opacity-80">Try it</div>
           <div className="italic text-lg text-green-400 mt-4">
             Most popular bots:
-            <span className="ml-2 underline cursor-pointer">IELTS-egb</span>
+            <span onClick={() => goToBot('ielts-egb')} className="ml-2 underline cursor-pointer">IELTS-egb</span>
           </div>
         </div>
       </section>
@@ -53,7 +49,14 @@ const Home: React.FC = () => {
           {
             list.map((item, index) => {
               return (
-                <BotButton desc={item.desc} icon={item.icon} key={index} id={item.id} text={item.text} />
+                <BotButton
+                  desc={item.desc}
+                  icon={item.icon}
+                  key={index}
+                  id={item.id}
+                  text={item.text}
+                  onClick={() => goToBot(item.id)}
+                />
               )
             })
           }
